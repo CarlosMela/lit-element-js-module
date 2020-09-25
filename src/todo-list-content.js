@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit-element';
+import { repeat } from 'lit-html/directives/repeat';
 
 class TodoListContent extends LitElement {
     static styles = styles();
@@ -15,9 +16,9 @@ class TodoListContent extends LitElement {
     render() {
         return html`
             <div class="todo-list-content">
-                ${this.items.map(item => (
-            html`<todo-list-item ?checked="${item.checked}" itemId="${item.id}">${item.value}</todo-list-item>`
-        ))}
+            ${repeat(this.items, item => item.id,
+            item => html`<todo-list-item ?checked="${item.checked}" itemId="${item.id}">${item.value}</todo-list-item>`
+        )}
             </div>
         `;
     }
